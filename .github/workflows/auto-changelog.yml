@@ -1,0 +1,45 @@
+name: Que test
+
+on:
+    workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+  actions: read
+
+jobs:
+  wait-for-que:
+    runs-on: ubuntu-latest
+    steps:
+        #sleep for 10 seconds to allow que to start
+      - name: Sleep for 10 seconds
+        run: sleep 10
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install Dependencies
+        run: |
+          pip install PyGithub
+
+      - name: Wait for Que to finish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          WORKFLOW_RUN_ID: ${{ github.run_id }}
+        run: |
+          python ./wait_for_que.py
+          echo "Script exited with code $?"
+
+  update-changelog:
+    runs-on: ubuntu-latest
+    needs: wait-for-que
+    steps:
+      - name: show info message that we are finished
+        run: echo "Que has finished, proceeding with changelog update..."
