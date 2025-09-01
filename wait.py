@@ -32,5 +32,5 @@ while True:
         print("No workflow runs queued or running before us, proceeding...")
         break
 
-    print("There are still workflow runs queued or running before us, waiting 10 seconds...")
+    print("There are still workflow runs queued or running before us, waiting 10 seconds...", flush=True)
     time.sleep(10)
