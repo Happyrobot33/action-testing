@@ -6,7 +6,7 @@ import time
 # using an access token
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 REPO_NAME = os.getenv("GITHUB_REPOSITORY")
-RUN_ID = int(os.getenv("WORKFLOW_RUN_ID"))
+RUN_NUMBER = int(os.getenv("WORKFLOW_RUN_NUMBER"))
 WORKFLOW_NAME = os.getenv("WORKFLOW_NAME")
 
 g = Github(GITHUB_TOKEN)
@@ -20,7 +20,7 @@ def checkIfSafeToProceed(status):
     for wr in workflow_runs:
         print(f"Found workflow run {wr.name} with ID {wr.run_number} and status {wr.status}", flush=True)
     que_workflow_runs = [wr for wr in workflow_runs if wr.name == WORKFLOW_NAME]
-    any_before_us = any(wr.run_number < RUN_ID for wr in que_workflow_runs)
+    any_before_us = any(wr.run_number < RUN_NUMBER for wr in que_workflow_runs)
     return not any_before_us
 
 #loop and get all their IDs, and check if ANY are less than us
