@@ -3,6 +3,8 @@ from github import Github
 # Authentication is defined via github.Auth
 from github import Auth
 
+import os
+
 # using an access token
 github_token = os.getenv("GITHUB_TOKEN")
 repo_name = os.getenv("GITHUB_REPOSITORY")
