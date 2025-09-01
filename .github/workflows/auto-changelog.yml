@@ -44,3 +44,6 @@ jobs:
     steps:
       - name: show info message that we are finished
         run: echo "Que has finished, proceeding with changelog update..."
+    
+      - name: Sleep for 10 seconds
+        run: sleep 20
