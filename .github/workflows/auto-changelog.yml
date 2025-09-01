@@ -33,6 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           WORKFLOW_RUN_ID: ${{ github.run_id }}
+          WORKFLOW_NAME: ${{ github.workflow }}
         run: |
           python wait.py
           echo "Script exited with code $?"
