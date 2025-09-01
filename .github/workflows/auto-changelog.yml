@@ -34,7 +34,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           WORKFLOW_RUN_ID: ${{ github.run_id }}
         run: |
-          python ./wait_for_que.py
+          python wait.py
           echo "Script exited with code $?"
 
   update-changelog:
